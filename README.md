@@ -72,9 +72,9 @@ such as increasing max connections, default is 3, absolute maximum connections i
 <br/>
 
 # Development Status
-This Library is tracking the esp-nimble repo, nimble-1.2.0-idf master branch, currently [@f4ae049.](https://github.com/espressif/esp-nimble)  
+This Library is tracking the esp-nimble repo, nimble-1.3.0-idf branch, currently [@c6f69c1.](https://github.com/espressif/esp-nimble)  
 
-Also tracking the NimBLE related changes in ESP-IDF, master branch, currently [@3caa969.](https://github.com/espressif/esp-idf/tree/master/components/bt/host/nimble) 
+Also tracking the NimBLE related changes in ESP-IDF, master branch, currently [@f401e97.](https://github.com/espressif/esp-idf/tree/master/components/bt/host/nimble) 
 <br/>
 
 # Acknowledgments
@@ -84,7 +84,6 @@ Also tracking the NimBLE related changes in ESP-IDF, master branch, currently [@
 <br/>  
 
 # Todo
-- Improve host reset handler
 - Implement random address handling
 - Implement bond management
 - Add Bluetooth Mesh
