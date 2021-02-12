@@ -254,7 +254,8 @@ int friend_cred_set(struct friend_cred *cred, u8_t idx, const u8_t net_key[16])
 void friend_cred_refresh(u16_t net_idx)
 {
 	int i;
-
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wtype-limits"
 	for (i = 0; i < ARRAY_SIZE(friend_cred); i++) {
 		struct friend_cred *cred = &friend_cred[i];
 
@@ -264,6 +265,7 @@ void friend_cred_refresh(u16_t net_idx)
 			       sizeof(cred->cred[0]));
 		}
 	}
+#pragma GCC diagnostic pop
 }
 
 int friend_cred_update(struct bt_mesh_subnet *sub)
@@ -271,7 +273,8 @@ int friend_cred_update(struct bt_mesh_subnet *sub)
 	int err, i;
 
 	BT_DBG("net_idx 0x%04x", sub->net_idx);
-
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wtype-limits"
 	for (i = 0; i < ARRAY_SIZE(friend_cred); i++) {
 		struct friend_cred *cred = &friend_cred[i];
 
@@ -285,7 +288,7 @@ int friend_cred_update(struct bt_mesh_subnet *sub)
 			return err;
 		}
 	}
-
+#pragma GCC diagnostic pop
 	return 0;
 }
 
@@ -296,7 +299,8 @@ struct friend_cred *friend_cred_create(struct bt_mesh_subnet *sub, u16_t addr,
 	int i, err;
 
 	BT_DBG("net_idx 0x%04x addr 0x%04x", sub->net_idx, addr);
-
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wtype-limits"
 	for (cred = NULL, i = 0; i < ARRAY_SIZE(friend_cred); i++) {
 		if ((friend_cred[i].addr == BT_MESH_ADDR_UNASSIGNED) ||
 		    (friend_cred[i].addr == addr &&
@@ -305,7 +309,7 @@ struct friend_cred *friend_cred_create(struct bt_mesh_subnet *sub, u16_t addr,
 			break;
 		}
 	}
-
+#pragma GCC diagnostic pop
 	if (!cred) {
 		BT_WARN("No free friend credential slots");
 		return NULL;
@@ -345,7 +349,8 @@ void friend_cred_clear(struct friend_cred *cred)
 int friend_cred_del(u16_t net_idx, u16_t addr)
 {
 	int i;
-
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wtype-limits"
 	for (i = 0; i < ARRAY_SIZE(friend_cred); i++) {
 		struct friend_cred *cred = &friend_cred[i];
 
@@ -354,7 +359,7 @@ int friend_cred_del(u16_t net_idx, u16_t addr)
 			return 0;
 		}
 	}
-
+#pragma GCC diagnostic pop
 	return -ENOENT;
 }
 
@@ -364,7 +369,8 @@ int friend_cred_get(struct bt_mesh_subnet *sub, u16_t addr, u8_t *nid,
 	int i;
 
 	BT_DBG("net_idx 0x%04x addr 0x%04x", sub->net_idx, addr);
-
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wtype-limits"
 	for (i = 0; i < ARRAY_SIZE(friend_cred); i++) {
 		struct friend_cred *cred = &friend_cred[i];
 
@@ -390,7 +396,7 @@ int friend_cred_get(struct bt_mesh_subnet *sub, u16_t addr, u8_t *nid,
 
 		return 0;
 	}
-
+#pragma GCC diagnostic pop
 	return -ENOENT;
 }
 
@@ -1024,7 +1030,8 @@ static int friend_decrypt(struct bt_mesh_subnet *sub, const u8_t *data,
 	int i;
 
 	BT_DBG("NID 0x%02x net_idx 0x%04x", NID(data), sub->net_idx);
-
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wtype-limits"
 	for (i = 0; i < ARRAY_SIZE(friend_cred); i++) {
 		struct friend_cred *cred = &friend_cred[i];
 
@@ -1049,7 +1056,7 @@ static int friend_decrypt(struct bt_mesh_subnet *sub, const u8_t *data,
 			return 0;
 		}
 	}
-
+#pragma GCC diagnostic pop
 	return -ENOENT;
 }
 
